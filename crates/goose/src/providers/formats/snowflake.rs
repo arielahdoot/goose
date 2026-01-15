@@ -185,6 +185,7 @@ pub fn parse_streaming_response(sse_data: &str) -> Result<Message> {
             let input_value = serde_json::from_str::<Value>(&tool_input)
                 .unwrap_or_else(|_| Value::String(tool_input.clone()));
             let tool_call = CallToolRequestParam {
+                task: None,
                 name: name.into(),
                 arguments: Some(object(input_value)),
             };
@@ -192,6 +193,7 @@ pub fn parse_streaming_response(sse_data: &str) -> Result<Message> {
         } else {
             // Tool with no input - use empty object
             let tool_call = CallToolRequestParam {
+                task: None,
                 name: name.into(),
                 arguments: Some(object!({})),
             };
@@ -252,6 +254,7 @@ pub fn response_to_message(response: &Value) -> Result<Message> {
                     .clone();
 
                 let tool_call = CallToolRequestParam {
+                    task: None,
                     name: name.into(),
                     arguments: Some(object(input)),
                 };

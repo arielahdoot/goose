@@ -340,6 +340,7 @@ pub fn response_to_message(response: &Value) -> anyhow::Result<Message> {
                             content.push(MessageContent::tool_request(
                                 id,
                                 Ok(CallToolRequestParam {
+                                    task: None,
                                     name: function_name.into(),
                                     arguments: Some(object(params)),
                                 }),
@@ -562,7 +563,11 @@ where
                             Ok(params) => {
                                 MessageContent::tool_request_with_metadata(
                                     id.clone(),
-                                    Ok(CallToolRequestParam { name: function_name.clone().into(), arguments: Some(object(params)) }),
+                                    Ok(CallToolRequestParam {
+                                        task: None,
+                                        name: function_name.clone().into(),
+                                        arguments: Some(object(params))
+                                    }),
                                     metadata.as_ref(),
                                 )
                             },

@@ -250,6 +250,7 @@ pub fn response_to_message(response: &Value) -> Result<Message> {
                     .ok_or_else(|| anyhow!("Missing tool_use input"))?;
 
                 let tool_call = CallToolRequestParam {
+                    task: None,
                     name: name.into(),
                     arguments: Some(object(input.clone())),
                 };
@@ -612,7 +613,11 @@ where
                                 }
                             };
 
-                            let tool_call = CallToolRequestParam{ name: name.into(), arguments: Some(object(parsed_args)) };
+                            let tool_call = CallToolRequestParam{
+                                task: None,
+                                name: name.into(),
+                                arguments: Some(object(parsed_args))
+                            };
 
                             let mut message = Message::new(
                                 rmcp::model::Role::Assistant,

@@ -45,6 +45,7 @@ impl SkillsClient {
         let info = InitializeResult {
             protocol_version: ProtocolVersion::V_2025_03_26,
             capabilities: ServerCapabilities {
+                tasks: None,
                 tools: Some(ToolsCapability {
                     list_changed: Some(false),
                 }),

@@ -422,6 +422,7 @@ fn process_response_part_impl(
             Some(MessageContent::tool_request_with_metadata(
                 id,
                 Ok(CallToolRequestParam {
+                    task: None,
                     name: name.to_string().into(),
                     arguments,
                 }),

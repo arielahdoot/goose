@@ -341,6 +341,7 @@ pub fn response_to_message(response: &Value) -> anyhow::Result<Message> {
                             content.push(MessageContent::tool_request(
                                 id,
                                 Ok(CallToolRequestParam {
+                                    task: None,
                                     name: function_name.into(),
                                     arguments: Some(object(params)),
                                 }),
